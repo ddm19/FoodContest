@@ -1,0 +1,15 @@
+{
+  "short_name": "Food Contest",
+  "name": "Food Contest Voting App",
+  "icons": [
+    {
+      "src": "FCLogoNOBG.png",
+      "type": "image/png",
+      "sizes": "450x337"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
