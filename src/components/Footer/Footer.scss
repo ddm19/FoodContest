@@ -15,39 +15,3 @@
 {
     color: var(--color-primary-dark);
 }
-
-.externalToolsContainer
-{
-    display: flex;
-    flex-direction: column;
-}
-
-.externalTools
-{
-    display: grid;
-    grid-template-rows: repeat(auto-fit, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-
-}
-
-.externalToolsTitle
-{
-    line-height: 1px;
-}
-
-.externalTool
-{
-    width: fit-content;
-    transition: 0.25s;
-
-    &:hover
-    {
-        transform: scale(1.1);
-    }
-}
-
-.alignLeft
-{
-    text-align: left;
-}
