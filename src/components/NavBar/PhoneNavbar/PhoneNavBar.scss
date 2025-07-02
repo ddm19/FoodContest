@@ -18,9 +18,9 @@
   background-color: var(--color-background);
   justify-content: center;
   border: solid 1px var(--color-primary-dark);
-  -webkit-box-shadow: 4px 4px 2px 0px rgba(94, 2, 2, 0.5);
-  -moz-box-shadow: 4px 4px 2px 0px rgba(94, 2, 2, 0.5);
-  box-shadow: 4px 4px 2px 0px rgba(94, 2, 2, 0.5);
+  -webkit-box-shadow: 4px 4px 2px 0px var(--color-primary-dark-opacity);
+  -moz-box-shadow: 4px 4px 2px 0px var(--color-primary-dark-opacity);
+  box-shadow: 4px 4px 2px 0px var(--color-primary-dark-opacity);
   align-items: center;
   transform: translateX(-170%);
   transition: all 0.1s linear;

@@ -37,8 +37,7 @@
   border-radius: 10%;
 }
 
-.navbar .navContainer,
-.discordButton
+.navbar .navContainer
 {
   display: flex;
   flex-direction: row;
@@ -65,7 +64,7 @@
 
     &:hover
     {
-      background-color: rgba(94, 2, 2, 0.6);
+      background-color: var(--color-primary-dark-opacity);
       border-radius: 5px;
       transition: all 0.25s ease-in-out;
 
@@ -126,7 +125,7 @@
     border: var(--color-primary-dark);
     border-radius: 5px;
     width: max-content;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px 0px var(--color-border);
     list-style: none;
     text-align: center;
     flex-direction: column;
@@ -138,7 +137,7 @@
 
   .activeLink
   {
-    background-color: #7d2709;
+    background-color: var(--color-primary-dark);
     border-radius: 5px;
 
     .navLink
@@ -156,7 +155,7 @@
 .navSeparator
 {
   height: 2em;
-  background-color: #f57f17;
+  background-color: var(--color-warning-dark);
   width: 2px;
 }
 
@@ -171,16 +170,11 @@
   display: none;
 }
 
-.disabled
-{
-  display: none;
-}
 
 @media (max-width: 900px)
 {
 
-  .navbar .navContainer,
-  .discordButton
+  .navbar .navContainer
   {
     width: 100%;
     margin-left: 0;
