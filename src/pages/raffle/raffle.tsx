@@ -54,7 +54,7 @@ const Raffle: React.FC = () => {
 
 
     return (
-        !isLoading ? <Loading text='Sorteando colores...' />
+        isLoading ? <Loading text='Sorteando colores...' />
             : (
                 <div className="raffle">
                     <div className='raffle__tableContainer'>
