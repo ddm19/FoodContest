@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useState, useEffect } from "react";
-import { Button } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CustomButton from "components/customButton/customButton";
 
 const ThemeToggle: React.FC = () => {
     const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -30,9 +29,9 @@ const ThemeToggle: React.FC = () => {
     const toggle = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
 
     return (
-        <Button variant="text" color="primary" onClick={toggle} className="themeToggle">
+        <CustomButton variant="text" color="primary" onClick={toggle} >
             {theme === "dark" ? '🌞' : '🌚'}
-        </Button>
+        </CustomButton>
     );
 };
 

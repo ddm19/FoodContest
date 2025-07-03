@@ -9,16 +9,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar></NavBar>
+        <NavBar />
       </header>
-      <main>
+
+      <main className="App-main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </main>
+
       <footer className="App-footer">
-        <Footer></Footer>
+        <Footer />
       </footer>
     </div>
   );

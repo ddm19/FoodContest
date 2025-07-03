@@ -1,0 +1,14 @@
+.customButton.MuiButton-root
+{
+
+    box-shadow: 1px 1px 5px var(--color-primary-dark);
+    align-self: center;
+    font-size: var(--font-size-6);
+
+    &:hover
+    {
+        background-color: var(--color-primary-dark);
+        color: var(--color-background);
+        transition: all 0.25s ease-in-out;
+    }
+}
