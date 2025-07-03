@@ -1,8 +1,8 @@
 import "./App.scss";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
-import Home from "./pages/homee/Home";
-import NoPage from "./pages/notFounde/notFound";
+import Home from "./pages/home/Home";
+import NoPage from "./pages/notFound/notFound";
 import { Routes, Route } from "react-router-dom";
 import Raffle from "pages/raffle/raffle";
 
