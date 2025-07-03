@@ -214,6 +214,8 @@
     flex: 1;
     padding: 5%;
     height: 90%;
+    flex-basis: fit-content;
+
   }
 
   .logo
@@ -252,4 +254,9 @@
     font-size: 1.8rem;
     color: var(--color-primary-dark);
   }
+}
+
+.themeToggle
+{
+  right: 5%;
 }

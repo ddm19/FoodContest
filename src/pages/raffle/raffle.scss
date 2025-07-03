@@ -1,0 +1,179 @@
+.raffle
+{
+    padding: var(--spacing-3);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+
+    @media (max-width: 768px)
+    {
+        flex-direction: column;
+        padding: var(--spacing-2);
+    }
+
+    &__tableContainer
+    {
+        width: 100%;
+        margin: var(--spacing-5);
+
+        @media (max-width: 768px)
+        {
+            width: 80%;
+            margin: var(--spacing-2);
+        }
+    }
+
+    &__table
+    {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: var(--spacing-2);
+    }
+
+    &__thead
+    {
+        background-color: var(--color-primary);
+
+        &__row
+        {
+            background-color: var(--color-primary-dark);
+        }
+    }
+
+    &__tbody &__row
+    {
+
+        &:nth-child(even)
+        {
+            background-color: var(--color-primary);
+        }
+
+        &:nth-child(odd)
+        {
+            background-color: var(--color-highlight);
+        }
+
+
+
+    }
+
+    &__cell
+    {
+        padding: var(--spacing-2) var(--spacing-2);
+        border: 1px solid var(--color-border);
+        color: var(--color-background);
+        font-size: var(--font-size-5);
+
+        &--header
+        {
+            font-weight: bold;
+            color: var(--color-text);
+            text-align: left;
+        }
+
+        &[data-color="Verde"]
+        {
+            background-color: var(--color-green);
+        }
+
+        &[data-color="Rojo"]
+        {
+            background-color: var(--color-red);
+        }
+
+        &[data-color="Blanco"]
+        {
+            background-color: var(--color-white);
+        }
+
+        &[data-color="Negro"]
+        {
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
+
+        &[data-color="Rosa"]
+        {
+            background-color: var(--color-pink);
+        }
+
+        &[data-color="Marrón"]
+        {
+            background-color: var(--color-brown);
+
+        }
+
+        &[data-color="Amarillo"]
+        {
+            background-color: var(--color-yellow);
+        }
+
+        &[data-color="Naranja"]
+        {
+            background-color: var(--color-orange);
+        }
+
+
+    }
+
+    &__button
+    {
+        display: inline-block;
+        padding: var(--spacing-2) var(--spacing-3);
+        background-color: var(--color-secondary);
+        color: var(--color-white);
+        font-size: var(--font-size-3);
+        border: none;
+        border-radius: var(--spacing-1);
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover
+        {
+            background-color: var(--color-secondary-dark);
+        }
+    }
+
+    &__results
+    {
+        margin-top: var(--spacing-3);
+
+        & .raffle__table
+        {
+            margin-top: var(--spacing-2);
+        }
+    }
+}
+
+.dark-mode
+{
+    .raffle
+    {
+        background-color: var(--color-background);
+
+        &__thead
+        {
+            background-color: var(--color-primary-dark);
+        }
+
+        &__cell--header
+        {
+            color: var(--color-text);
+        }
+
+        &__button
+        {
+            background-color: var(--color-secondary-dark);
+
+            &:hover
+            {
+                background-color: var(--color-secondary);
+            }
+        }
+    }
+}
