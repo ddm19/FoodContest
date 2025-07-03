@@ -164,6 +164,8 @@
   .navbar .navContainer
   {
     width: 100%;
+    height: -webkit-fill-available;
+
     margin-left: 0;
   }
 }
@@ -193,17 +195,42 @@
     {
       width: 30vw;
 
+      .navContainer
+      {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+
       .navButton
       {
         width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: var(--spacing-2) var(--spacing-4);
+        background-color: var(--color-primary-dark);
+        max-height: var(--input-size-2);
+
+        .link
+        {
+          color: var(--color-text);
+        }
 
         .dropdown
         {
           top: inherit;
           margin-left: 56%;
         }
+
+        .navbar .navContainer .navButton:hover .navLink
+        {
+          color: var(--color-background);
+        }
+
       }
     }
   }

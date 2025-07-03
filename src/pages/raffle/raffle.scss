@@ -79,16 +79,19 @@
         &[data-color="Verde"]
         {
             background-color: var(--color-green);
+            color: var(--color-black);
         }
 
         &[data-color="Rojo"]
         {
             background-color: var(--color-red);
+            color: var(--color-white);
         }
 
         &[data-color="Blanco"]
         {
             background-color: var(--color-white);
+            color: var(--color-black);
         }
 
         &[data-color="Negro"]
@@ -100,22 +103,26 @@
         &[data-color="Rosa"]
         {
             background-color: var(--color-pink);
+            color: var(--color-black);
         }
 
         &[data-color="Marrón"]
         {
             background-color: var(--color-brown);
+            color: var(--color-white);
 
         }
 
         &[data-color="Amarillo"]
         {
             background-color: var(--color-yellow);
+            color: var(--color-black);
         }
 
         &[data-color="Naranja"]
         {
             background-color: var(--color-orange);
+            color: var(--color-black);
         }
 
 

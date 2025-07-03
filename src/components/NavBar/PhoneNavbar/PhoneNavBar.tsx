@@ -54,7 +54,10 @@ const PhoneNavBar: React.FC<Props> = (props: Props) => {
                 <NavButton link={link} toggleMenu={toggleMenu}></NavButton>
               );
             })}
-            <FontAwesomeIcon className="navPhoneCloseButton" icon={faXmark} onClick={closeMenu} />
+            <span className="mobileNav__closeButton">
+              <FontAwesomeIcon className="navPhoneCloseButton" icon={faXmark} onClick={closeMenu} />
+
+            </span>
           </div>
         </ul>
       </nav>
