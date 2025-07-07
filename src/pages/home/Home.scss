@@ -26,6 +26,13 @@
     &__sectionButton
     {
         width: 60%;
-        height: var(--input-size-9)
+
+        height: var(--input-size-9);
+
+        @media (max-width: 700px)
+        {
+            width: 90%;
+            height: var(--input-size-6);
+        }
     }
 }

@@ -12,14 +12,12 @@ interface Team {
 type Assignments = Record<string, string>;
 
 const teams: Team[] = [
-    { name: 'Equipo A', members: ['Alice', 'Bob'] },
-    { name: 'Equipo B', members: ['Charlie', 'David'] },
-    { name: 'Equipo C', members: ['Eve', 'Frank'] },
-    { name: 'Equipo D', members: ['Grace', 'Hank'] },
-    { name: 'Equipo E', members: ['Ivy', 'Jack'] },
-    { name: 'Equipo F', members: ['Kate', 'Leo'] },
-    { name: 'Equipo G', members: ['Mia', 'Nina'] },
-    { name: 'Equipo H', members: ['Olivia', 'Peter'] },
+    { name: 'Sasori', members: ['Marcos', 'Assem'] },
+    { name: 'Fuera moros', members: ['Manu', 'Sonia'] },
+    { name: 'Tortugos', members: ['Ani', 'Javilo'] },
+    { name: 'Intolerantes', members: ['Marc', 'Mery'] },
+    { name: 'Choripanes Racistas', members: ['Dani', 'Brisa'] },
+
 
 ];
 
@@ -57,8 +55,18 @@ const Raffle: React.FC = () => {
         isLoading ? <Loading text='Sorteando colores...' />
             : (
                 <div className="raffle">
+                    <h1 className="raffle__title">Colores Disponibles</h1>
+
+                    <div className='raffle__colors'>
+                        {colors.map((color) => (
+                            <div key={color} className="raffle__cell" data-color={color}>
+                                {color}
+                            </div>
+                        ))}
+                    </div>
                     <div className='raffle__tableContainer'>
-                        <h2 className="raffle__title">Participantes</h2>
+
+                        <h1 className="raffle__title">Participantes</h1>
                         <table className="raffle__table">
                             <thead className="raffle__thead">
                                 <tr className="raffle__row">
