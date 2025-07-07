@@ -89,7 +89,7 @@ const Raffle: React.FC = () => {
 
                         {Object.keys(assignments).length > 0 && (
                             <div className="raffle__results">
-                                <h2 className="raffle__title">Resultados</h2>
+                                <h1 className="raffle__title">Resultados</h1>
                                 <table className="raffle__table">
                                     <thead className="raffle__thead">
                                         <tr className="raffle__row">
