@@ -17,11 +17,12 @@ const teams: Team[] = [
     { name: 'Tortugos', members: ['Ani', 'Javilo'] },
     { name: 'Intolerantes', members: ['Marc', 'Mery'] },
     { name: 'Choripanes Racistas', members: ['Dani', 'Brisa'] },
+    { name: 'No sabemos cocinar', members: ['Guti', 'Jorge', 'Moru'] },
 
 
 ];
 
-const colors = ['Amarillo', 'Naranja', 'Rojo', 'Rosa', 'Marrón', 'Verde', 'Blanco', 'Negro'];
+const colors = ['Amarillo', 'Naranja', 'Rojo', 'Marrón', 'Verde', 'Blanco'];
 
 const shuffle = (array: string[]): string[] => {
     const arr = [...array];
