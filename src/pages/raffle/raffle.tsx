@@ -21,6 +21,15 @@ const teams: Team[] = [
 
 
 ];
+const fixedAssignments: Assignments = {
+    ['Sasori']: 'Marrón',
+    ['Fuera moros']: 'Amarillo',
+    ['Tortugos']: 'Blanco',
+    ['Intolerantes']: 'Verde',
+    ['Choripanes Racistas']: 'Rojo',
+    ['No sabemos cocinar']: 'Naranja',
+}
+
 
 const colors = ['Amarillo', 'Naranja', 'Rojo', 'Marrón', 'Verde', 'Blanco'];
 
@@ -85,10 +94,10 @@ const Raffle: React.FC = () => {
                             </tbody>
                         </table>
                     </div>
-                    <CustomButton className="raffle__button" onClick={() => handleRaffle()}>Hacer sorteo</CustomButton>
+                    {/* <CustomButton className="raffle__button" onClick={() => handleRaffle()}>Hacer sorteo</CustomButton> */}
                     <div className='raffle__tableContainer'>
 
-                        {Object.keys(assignments).length > 0 && (
+                        {Object.keys(fixedAssignments).length > 0 && (
                             <div className="raffle__results">
                                 <h1 className="raffle__title">Resultados</h1>
                                 <table className="raffle__table">
@@ -102,7 +111,7 @@ const Raffle: React.FC = () => {
                                         {teams.map((team) => (
                                             <tr key={team.name} className="raffle__row">
                                                 <td className="raffle__cell">{team.name}</td>
-                                                <td className="raffle__cell" data-color={assignments[team.name]}>{assignments[team.name]}</td>
+                                                <td className="raffle__cell" data-color={fixedAssignments[team.name]}>{fixedAssignments[team.name]}</td>
                                             </tr>
                                         ))}
                                     </tbody>
