@@ -65,7 +65,7 @@ const Raffle: React.FC = () => {
         isLoading ? <Loading text='Sorteando colores...' />
             : (
                 <div className="raffle">
-                    <h1 className="raffle__title">Colores Disponibles</h1>
+                    <h2 className="raffle__title">Colores Disponibles</h2>
 
                     <div className='raffle__colors'>
                         {colors.map((color) => (

@@ -16,14 +16,11 @@
         display: flex;
         flex-wrap: wrap;
         gap: var(--spacing-2);
-        margin-bottom: var(--spacing-3);
         width: 100%;
         justify-content: center;
         align-items: center;
 
     }
-
-
 
 
     @media (max-width: 768px)
@@ -35,7 +32,6 @@
     &__tableContainer
     {
         width: 80%;
-        margin: var(--spacing-5);
 
         @media (max-width: 768px)
         {
