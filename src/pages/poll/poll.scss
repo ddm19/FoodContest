@@ -13,36 +13,36 @@
     font-size: var(--font-size-10);
   }
 
-  &__title--amarillo {
+  &__title--yellow {
     color: var(--color-yellow);
   }
 
-  &__title--naranja {
+  &__title--orange {
     color: var(--color-orange);
   }
 
-  &__title--rojo {
+  &__title--red {
     color: var(--color-red);
   }
 
-  &__title--rosa {
+  &__title--pink {
     color: var(--color-pink);
   }
 
-  &__title--marron {
+  &__title--brown {
     color: var(--color-brown);
   }
 
-  &__title--verde {
+  &__title--green {
     color: var(--color-green);
   }
 
-  &__title--blanco {
+  &__title--white {
     color: var(--color-white);
     text-shadow: 0 0 2px #aaa;
   }
 
-  &__title--negro {
+  &__title--black {
     color: var(--color-black);
   }
 
@@ -73,36 +73,37 @@
     border: 3px solid var(--color-border);
     cursor: pointer;
     transition: all 0.2s;
+    flex-direction: column;
 
-    &[data-color="Amarillo"] {
+    &[data-color="Yellow"] {
       background-color: var(--color-yellow);
     }
 
-    &[data-color="Naranja"] {
+    &[data-color="Orange"] {
       background-color: var(--color-orange);
     }
 
-    &[data-color="Rojo"] {
+    &[data-color="Red"] {
       background-color: var(--color-red);
     }
 
-    &[data-color="Rosa"] {
+    &[data-color="Pink"] {
       background-color: var(--color-pink);
     }
 
-    &[data-color="Marrón"] {
+    &[data-color="Brown"] {
       background-color: var(--color-brown);
     }
 
-    &[data-color="Verde"] {
+    &[data-color="Green"] {
       background-color: var(--color-green);
     }
 
-    &[data-color="Blanco"] {
+    &[data-color="White"] {
       background-color: var(--color-white);
     }
 
-    &[data-color="Negro"] {
+    &[data-color="Black"] {
       background-color: var(--color-black);
       color: var(--color-white);
     }
@@ -157,36 +158,35 @@
     background: var(--color-surface);
     padding: var(--spacing-3) 0;
 
-    &--glow-amarillo {
+    &--glowYellow {
       animation: pollGlowPulseYellow 1.2s infinite alternate;
     }
 
-    &--glow-naranja {
+    &--glowOrange {
       animation: pollGlowPulseOrange 1.2s infinite alternate;
     }
 
-    &--glow-rojo {
+    &--glowRed {
       animation: pollGlowPulseRed 1.2s infinite alternate;
     }
 
-    &--glow-rosa {
+    &--glowPink {
       animation: pollGlowPulsePink 1.2s infinite alternate;
     }
 
-    &--glow-marrón,
-    &--glow-marron {
+    &--glowBrown {
       animation: pollGlowPulseBrown 1.2s infinite alternate;
     }
 
-    &--glow-verde {
+    &--glowGreen {
       animation: pollGlowPulseGreen 1.2s infinite alternate;
     }
 
-    &--glow-blanco {
+    &--glowWhite {
       animation: pollGlowPulseWhite 1.2s infinite alternate;
     }
 
-    &--glow-negro {
+    &--glowBlack {
       animation: pollGlowPulseBlack 1.2s infinite alternate;
     }
   }
@@ -257,6 +257,12 @@
 
   &__voteNumber--selected {
     text-shadow: 0 0 7px var(--color-highlight);
+  }
+
+  &__selectableImage {
+    width: var(--image-size-1);
+    height: var(--image-size-1);
+    border-radius: 50%;
   }
 }
 
@@ -352,4 +358,3 @@
     box-shadow: 0 0 24px 8px var(--color-black);
   }
 }
-
