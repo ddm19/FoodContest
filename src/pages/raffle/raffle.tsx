@@ -12,18 +12,26 @@ interface Team {
 type Assignments = Record<string, string>;
 
 const teams: Team[] = [
-    { name: 'Equipo A', members: ['Alice', 'Bob'] },
-    { name: 'Equipo B', members: ['Charlie', 'David'] },
-    { name: 'Equipo C', members: ['Eve', 'Frank'] },
-    { name: 'Equipo D', members: ['Grace', 'Hank'] },
-    { name: 'Equipo E', members: ['Ivy', 'Jack'] },
-    { name: 'Equipo F', members: ['Kate', 'Leo'] },
-    { name: 'Equipo G', members: ['Mia', 'Nina'] },
-    { name: 'Equipo H', members: ['Olivia', 'Peter'] },
+    { name: 'Sasori', members: ['Marcos', 'Assem'] },
+    { name: 'Fuera moros', members: ['Manu', 'Sonia'] },
+    { name: 'Tortugos', members: ['Ani', 'Javilo'] },
+    { name: 'Intolerantes', members: ['Marc', 'Mery'] },
+    { name: 'Choripanes Racistas', members: ['Dani', 'Brisa'] },
+    { name: 'No sabemos cocinar', members: ['Guti', 'Jorge', 'Moru'] },
+
 
 ];
+const fixedAssignments: Assignments = {
+    ['Sasori']: 'Marrón',
+    ['Fuera moros']: 'Amarillo',
+    ['Tortugos']: 'Blanco',
+    ['Intolerantes']: 'Verde',
+    ['Choripanes Racistas']: 'Rojo',
+    ['No sabemos cocinar']: 'Naranja',
+}
 
-const colors = ['Amarillo', 'Naranja', 'Rojo', 'Rosa', 'Marrón', 'Verde', 'Blanco', 'Negro'];
+
+const colors = ['Amarillo', 'Naranja', 'Rojo', 'Marrón', 'Verde', 'Blanco'];
 
 const shuffle = (array: string[]): string[] => {
     const arr = [...array];
@@ -57,8 +65,18 @@ const Raffle: React.FC = () => {
         isLoading ? <Loading text='Sorteando colores...' />
             : (
                 <div className="raffle">
+                    <h2 className="raffle__title">Colores Disponibles</h2>
+
+                    <div className='raffle__colors'>
+                        {colors.map((color) => (
+                            <div key={color} className="raffle__cell" data-color={color}>
+                                {color}
+                            </div>
+                        ))}
+                    </div>
                     <div className='raffle__tableContainer'>
-                        <h2 className="raffle__title">Participantes</h2>
+
+                        <h1 className="raffle__title">Participantes</h1>
                         <table className="raffle__table">
                             <thead className="raffle__thead">
                                 <tr className="raffle__row">
@@ -76,12 +94,12 @@ const Raffle: React.FC = () => {
                             </tbody>
                         </table>
                     </div>
-                    <CustomButton className="raffle__button" onClick={() => handleRaffle()}>Hacer sorteo</CustomButton>
+                    {/* <CustomButton className="raffle__button" onClick={() => handleRaffle()}>Hacer sorteo</CustomButton> */}
                     <div className='raffle__tableContainer'>
 
-                        {Object.keys(assignments).length > 0 && (
+                        {Object.keys(fixedAssignments).length > 0 && (
                             <div className="raffle__results">
-                                <h2 className="raffle__title">Resultados</h2>
+                                <h1 className="raffle__title">Resultados</h1>
                                 <table className="raffle__table">
                                     <thead className="raffle__thead">
                                         <tr className="raffle__row">
@@ -93,7 +111,7 @@ const Raffle: React.FC = () => {
                                         {teams.map((team) => (
                                             <tr key={team.name} className="raffle__row">
                                                 <td className="raffle__cell">{team.name}</td>
-                                                <td className="raffle__cell" data-color={assignments[team.name]}>{assignments[team.name]}</td>
+                                                <td className="raffle__cell" data-color={fixedAssignments[team.name]}>{fixedAssignments[team.name]}</td>
                                             </tr>
                                         ))}
                                     </tbody>

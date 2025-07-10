@@ -8,12 +8,12 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
-      <h1>Welcome to the Food Contest Voting App</h1>
+      <h1>Bienvenidos a La Velada de colorines 2025</h1>
       <div className="home__buttonContainer">
         <CustomButton variant="text" color="primary" className="home__sectionButton" onClick={() => { navigate('/raffle ') }} >
           SORTEO DE COLORES
         </CustomButton>
-        <CustomButton variant="text" color="primary" className="home__sectionButton" onClick={() => { navigate('/poll ')}} >
+        <CustomButton variant="text" color="primary" className="home__sectionButton" onClick={() => { navigate('/poll ') }} >
           VOTACIONES
         </CustomButton>
       </div>

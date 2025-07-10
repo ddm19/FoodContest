@@ -43,6 +43,23 @@
     width: 35vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    &__closeButton
+    {
+      position: absolute;
+      bottom: var(--spacing-4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-text);
+      font-size: var(--font-size-6);
+      background-color: var(--color-primary-dark);
+      border-radius: 5%;
+      width: var(--input-size-1_5);
+      height: var(--input-size-1_5);
+      cursor: pointer;
+    }
   }
 }
 
