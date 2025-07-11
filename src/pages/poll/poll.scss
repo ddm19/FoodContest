@@ -48,7 +48,7 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-3);
     width: 80%;
     margin-bottom: var(--spacing-4);
@@ -59,48 +59,73 @@
     }
   }
 
+  &__selectableImage {
+    width: var(--image-size-3);
+    height: auto;
+    border-radius: 20%;
+    padding: var(--spacing-1);
+
+    @media (max-width: 700px) {
+      width: var(--image-size-2);
+    }
+  }
+
   &__colorBox {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 120px;
-    border-radius: 12px;
+    height: fit-content;
+    border-radius: 2%;
     font-size: var(--font-size-10);
     font-weight: bold;
-    color: var(--color-black);
+    color: var(--color-text);
+    background-color: var(--color-background);
     font-family: var(--font-family-amatic);
-    background-color: var(--color-surface);
-    border: 3px solid var(--color-border);
+    border: none;
     cursor: pointer;
     transition: all 0.2s;
     flex-direction: column;
 
     &[data-color="Yellow"] {
       background-color: var(--color-yellow);
+      color: var(--color-black);
+
     }
 
     &[data-color="Orange"] {
       background-color: var(--color-orange);
+      color: var(--color-black);
+
     }
 
     &[data-color="Red"] {
       background-color: var(--color-red);
+      color: var(--color-black);
+
     }
 
     &[data-color="Pink"] {
       background-color: var(--color-pink);
+      color: var(--color-black);
+
     }
 
     &[data-color="Brown"] {
       background-color: var(--color-brown);
+      color: var(--color-black);
+
     }
 
     &[data-color="Green"] {
       background-color: var(--color-green);
+      color: var(--color-black);
+
     }
 
     &[data-color="White"] {
       background-color: var(--color-white);
+      color: var(--color-black);
+
     }
 
     &[data-color="Black"] {
@@ -259,11 +284,7 @@
     text-shadow: 0 0 7px var(--color-highlight);
   }
 
-  &__selectableImage {
-    width: var(--image-size-1);
-    height: var(--image-size-1);
-    border-radius: 50%;
-  }
+
 }
 
 .dark-mode {

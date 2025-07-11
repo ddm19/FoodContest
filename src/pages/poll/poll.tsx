@@ -31,7 +31,6 @@ const Poll: React.FC = () => {
     };
 
     const handleColorSelect = (color: string) => {
-        debugger
         setSelectedColor(color);
         setVotes({});
     };

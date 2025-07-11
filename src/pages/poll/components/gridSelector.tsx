@@ -20,7 +20,7 @@ const GridSelector = (props: ParticipantSelectorProps) => {
                     onClick={() => handleSelect(selectable.name)}
                     data-color={selectable.backgroundColor}
                 >
-                    {selectable.img && <img src={selectable.img} alt={selectable.name} className="poll_selectableImage" />}
+                    {selectable.img && <img src={selectable.img} alt={selectable.name} className="poll__selectableImage" />}
                     <span>{selectable.name}</span>
                 </button>
             ))}
