@@ -49,15 +49,15 @@ const PhoneNavBar: React.FC<Props> = (props: Props) => {
       >
         <ul className="navContainer">
           <div className="mobileNav">
+            <span className="mobileNav__closeButton">
+              <FontAwesomeIcon className="navPhoneCloseButton" icon={faXmark} onClick={closeMenu} />
+            </span>
             {navigationLinks.map((link: NavigationLink, index: number) => {
               return (
                 <NavButton link={link} toggleMenu={toggleMenu}></NavButton>
               );
             })}
-            <span className="mobileNav__closeButton">
-              <FontAwesomeIcon className="navPhoneCloseButton" icon={faXmark} onClick={closeMenu} />
 
-            </span>
           </div>
         </ul>
       </nav>

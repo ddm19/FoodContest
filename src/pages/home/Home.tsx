@@ -10,11 +10,11 @@ const Home: React.FC = () => {
     <div className="home">
       <h1>Bienvenidos a La Velada de colorines 2025</h1>
       <div className="home__buttonContainer">
-        <CustomButton variant="text" color="primary" className="home__sectionButton" onClick={() => { }} >
-          Votar
-        </CustomButton>
         <CustomButton variant="text" color="primary" className="home__sectionButton" onClick={() => { navigate('/raffle ') }} >
-          SORTEO DE COLOR
+          SORTEO DE COLORES
+        </CustomButton>
+        <CustomButton variant="text" color="primary" className="home__sectionButton" onClick={() => { navigate('/poll ') }} >
+          VOTACIONES
         </CustomButton>
       </div>
 
