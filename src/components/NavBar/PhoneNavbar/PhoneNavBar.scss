@@ -1,20 +1,18 @@
 @use "/src/index.scss" as vars;
 
-.buttonMenu
-{
+.buttonMenu {
   appearance: none;
   background: none;
   border: none;
   width: 40%;
 }
 
-.menu
-{
+.menu {
   width: 55%;
-  height: 50vh;
+  height: 55vh;
   position: absolute;
   left: 0;
-  top: 5vh;
+  top: 2vh;
   background-color: var(--color-background);
   justify-content: center;
   border: solid 1px var(--color-primary-dark);
@@ -25,30 +23,27 @@
   transform: translateX(-170%);
   transition: all 0.1s linear;
 
-  .navContainer
-  {
+  .navContainer {
     flex-direction: column;
     padding-left: 0;
   }
 
-  .navButton
-  {
+  .navButton {
     border-radius: 5%;
   }
 
-  .mobileNav
-  {
+  .mobileNav {
     height: 90vh;
     margin-left: 0;
     width: 35vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: var(--input-size-2);
 
-    &__closeButton
-    {
+    &__closeButton {
       position: absolute;
-      bottom: var(--spacing-4);
+      top: var(--spacing-4);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -63,7 +58,6 @@
   }
 }
 
-.active-menu
-{
+.active-menu {
   transform: translateX(0);
 }

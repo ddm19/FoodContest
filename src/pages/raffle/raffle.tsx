@@ -2,36 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import './raffle.scss';
 import Loading from 'components/Loading/Loading';
-import CustomButton from 'components/customButton/customButton';
+import { fixedAssignments, teams } from 'pages/poll/constants';
 
-interface Team {
+export interface Team {
     name: string;
     members: string[];
 }
 
-type Assignments = Record<string, string>;
+export type Assignments = Record<string, string>;
 
-const teams: Team[] = [
-    { name: 'Sasori', members: ['Marcos', 'Assem'] },
-    { name: 'Fuera moros', members: ['Manu', 'Sonia'] },
-    { name: 'Tortugos', members: ['Ani', 'Javilo'] },
-    { name: 'Intolerantes', members: ['Marc', 'Mery'] },
-    { name: 'Choripanes Racistas', members: ['Dani', 'Brisa'] },
-    { name: 'No sabemos cocinar', members: ['Guti', 'Jorge', 'Moru'] },
-
-
-];
-const fixedAssignments: Assignments = {
-    ['Sasori']: 'Marrón',
-    ['Fuera moros']: 'Amarillo',
-    ['Tortugos']: 'Blanco',
-    ['Intolerantes']: 'Verde',
-    ['Choripanes Racistas']: 'Rojo',
-    ['No sabemos cocinar']: 'Naranja',
-}
-
-
-const colors = ['Amarillo', 'Naranja', 'Rojo', 'Marrón', 'Verde', 'Blanco'];
+const colors = ['Amarillo', 'Naranja', 'Rojo', 'Marrón', 'Verde', 'Blanco', 'Rosa'];
 
 const shuffle = (array: string[]): string[] => {
     const arr = [...array];
