@@ -10,7 +10,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 type Votes = { [category: string]: number | undefined };
 
-type VoteRecord = {
+export type VoteRecord = {
     voteColor: string;
     flavour: number;
     presentation: number;
@@ -27,12 +27,31 @@ const Poll: React.FC = () => {
     const [voteRecords, setVoteRecords] = useState<VoteRecord[]>([]);
     const [votedColors, setVotedColors] = useState<string[]>([]);
 
-    const handleParticipantSelect = (name: string) => {
-        setSelectedParticipant(name);
+    const fetchVoteRecords = () => {
+        if (!selectedParticipant) return;
+        getVotes(selectedParticipant).then(({ data, error }) => {
+            if (error) return;
+            const records = data ?? [];
+            setVoteRecords(records);
+            setVotedColors(records.map((v) => v.voteColor));
+        });
+    };
+
+    useEffect(() => {
+        if (selectedParticipant) {
+            localStorage.setItem("selectedParticipant", selectedParticipant);
+        } else {
+            localStorage.removeItem("selectedParticipant");
+        }
         setSelectedColor(null);
         setVotes({});
         setVoteRecords([]);
         setVotedColors([]);
+        fetchVoteRecords();
+    }, [selectedParticipant]);
+
+    const handleParticipantSelect = (name: string) => {
+        setSelectedParticipant(name);
     };
 
     const handleColorSelect = (color: string) => {
@@ -44,33 +63,10 @@ const Poll: React.FC = () => {
         if (selectedColor) {
             setSelectedColor(null);
             setVotes({});
-        } else if (selectedParticipant) {
+        } else {
             setSelectedParticipant(null);
-            setVoteRecords([]);
-            setVotedColors([]);
         }
     };
-
-
-    useEffect(() => {
-        if (selectedParticipant) {
-            localStorage.setItem("selectedParticipant", selectedParticipant);
-        } else {
-            localStorage.removeItem("selectedParticipant");
-        }
-
-        if (!selectedParticipant) return;
-        getVotes(selectedParticipant)
-            .then(({ data, error }) => {
-                if (error) {
-                    console.error("Error al recuperar votos:", error);
-                    return;
-                }
-                const records = data ?? [];
-                setVoteRecords(records);
-                setVotedColors(records.map((v) => v.voteColor));
-            })
-    }, [selectedParticipant]);
 
     useEffect(() => {
         if (!selectedColor) return;
@@ -125,6 +121,7 @@ const Poll: React.FC = () => {
                     voteCategories={voteCategories}
                     selectedColor={selectedColor}
                     setSelectedColor={setSelectedColor}
+                    reloadVotes={fetchVoteRecords}
                 />
             )}
         </div>
