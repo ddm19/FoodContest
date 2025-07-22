@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import CustomButton from "components/customButton/customButton";
 import "./poll.scss";
 import GridSelector from "./components/gridSelector";
-import { colors, voteCategories, colorClassMap, participants, colorGlowClassMap } from "./constants";
+import { colors, voteCategories, colorClassMap, participants } from "./constants";
+import VotePanel from "./components/votePanel";
 
 
 type Votes = {
@@ -16,14 +16,6 @@ const Poll: React.FC = () => {
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
     const [votes, setVotes] = useState<Votes>({});
 
-    const handleCategoryVote = (category: string, value: number) => {
-
-        setVotes((prev) => ({
-            ...prev,
-            [category]: votes[category] == value ? undefined : value,
-        }));
-    };
-
     const handleParticipantSelect = (name: string) => {
         setSelectedParticipant(name);
         setSelectedColor(null);
@@ -34,15 +26,6 @@ const Poll: React.FC = () => {
         setSelectedColor(color);
         setVotes({});
     };
-
-    const handleConfirm = () => {
-        setTimeout(() => {
-            setSelectedColor(null);
-            setVotes({});
-        }, 400);
-    };
-
-    const allVoted = voteCategories.every((cat) => votes[cat]);
 
 
     useEffect(() => {
@@ -66,43 +49,7 @@ const Poll: React.FC = () => {
             )}
 
             {selectedColor && (
-                <div className="poll__votePanel">
-                    <div className={`poll__categories ${selectedColor ? colorGlowClassMap[selectedColor] : ""}`}>
-                        {voteCategories.map((category) => (
-                            <div className="poll__category" key={category}>
-                                <h3 className="poll__categoryName">{category}</h3>
-                                <div className="poll__categoryVotes">
-                                    {[1, 2, 3, 4, 5].map((val) => (
-                                        <div key={val} className="poll__votePanWrapper">
-                                            <button
-                                                className={`poll__voteButton${votes[category] === val ? " poll__voteButton--selected" : ""}`}
-                                                onClick={() => handleCategoryVote(category, val)}
-                                                type="button"
-                                            >
-                                                <img
-                                                    src='Pan.png'
-                                                    alt={`Sartén ${val}`}
-                                                    className="poll__votePanImg"
-                                                />
-                                            </button>
-                                            <div
-                                                className={`poll__voteNumber${votes[category] === val ? " poll__voteNumber--selected" : ""}`}
-                                            >
-                                                {val}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    <CustomButton className="poll__button"
-                        onClick={handleConfirm}
-                        disabled={!allVoted}
-                        variant="outlined">
-                        Confirmar voto
-                    </CustomButton>
-                </div>
+                <VotePanel votes={votes} setVotes={setVotes} voteCategories={voteCategories} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
             )}
         </div>
     );
