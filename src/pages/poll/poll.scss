@@ -59,14 +59,14 @@
   &__grid
   {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-3);
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-4);
     width: 80%;
     margin-bottom: var(--spacing-4);
 
     @media (max-width: 700px)
     {
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       width: 90%;
 
     }
@@ -102,6 +102,14 @@
     cursor: pointer;
     transition: all 0.2s;
     flex-direction: column;
+
+    &--disabled
+    {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+
+    }
 
     &[data-color="Yellow"]
     {
@@ -344,6 +352,22 @@
     pointer-events: none;
     color: var(--color-surface);
     animation: textPulseColor 1.2s infinite alternate;
+  }
+
+  &__disabledOverlay
+  {
+    position: absolute;
+    top: var(--spacing-1);
+    left: var(--spacing-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-surface);
+    text-shadow: 0 0 2px var(--color-primary);
+    font-size: var(--font-size-6);
+    pointer-events: none;
+
+
   }
 
   @keyframes textPulseColor

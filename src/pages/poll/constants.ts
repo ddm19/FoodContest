@@ -1,3 +1,4 @@
+import { Assignments, Team } from "pages/raffle/raffle";
 import { SelectableItem } from "./components/gridSelector";
 
 export const colors: Array<SelectableItem> = [
@@ -7,6 +8,7 @@ export const colors: Array<SelectableItem> = [
     { name: "Verde", backgroundColor: "Green" },
     { name: "Rojo", backgroundColor: "Red" },
     { name: "Naranja", backgroundColor: "Orange" },
+    { name: "Rosa", backgroundColor: "Pink" },
 
 ];
 
@@ -46,10 +48,32 @@ export const participants = [
     { name: "Marcos", img: "marcos.jpeg" },
     { name: "Assem", img: "assem.jpeg" },
     { name: "Moru", img: "moru.jpeg" },
-    { name: "Jorge", img: "jorge.jpeg" },
+    { name: "Jorge", img: "jorge.png" },
     { name: "Guti", img: "guti.jpeg" },
     { name: "Javilo", img: "javilo.jpeg" },
     { name: "Ana", img: "ana.jpeg" },
     { name: "Manu", img: "manu.jpeg" },
     { name: "Sonia", img: "sonia.jpeg" },
+    { name: "Antonio", img: "antonio.jpeg" },
+    { name: "Noelia", img: "noelia.png" }
 ];
+
+export const fixedAssignments: Assignments = {
+    ['Sasori']: 'Marrón',
+    ['Fuera moros']: 'Amarillo',
+    ['Tortugos']: 'Blanco',
+    ['Intolerantes']: 'Verde',
+    ['Choripanes Racistas']: 'Rojo',
+    ['No sabemos cocinar']: 'Naranja',
+    ['No hay Derecho']: 'Rosa',
+};
+export const teams: Team[] = [
+    { name: 'Sasori', members: ['Marcos', 'Assem'] },
+    { name: 'Fuera moros', members: ['Manu', 'Sonia'] },
+    { name: 'Tortugos', members: ['Ani', 'Javilo'] },
+    { name: 'Intolerantes', members: ['Marc', 'Mery'] },
+    { name: 'Choripanes Racistas', members: ['Dani', 'Brisa'] },
+    { name: 'No sabemos cocinar', members: ['Guti', 'Jorge', 'Moru'] },
+    { name: 'No hay Derecho', members: ['Antonio', 'Noelia'] },
+];
+

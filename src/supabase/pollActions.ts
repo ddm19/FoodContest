@@ -24,3 +24,11 @@ export const upsertVotes = (
             originality: votes.originality,
         }    )
 }
+
+export const getParticipantColor = (participant: string) =>
+{
+    return supabase.from('Participant').select('color')
+        .eq('name', participant)
+        .single()
+        
+}

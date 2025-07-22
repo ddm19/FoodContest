@@ -3,7 +3,7 @@ import "./poll.scss";
 import GridSelector from "./components/gridSelector";
 import { colors, voteCategories, colorClassMap, participants } from "./constants";
 import VotePanel from "./components/votePanel";
-import { getVotes } from "supabase/pollActions";
+import { getVotes, getParticipantColor } from "supabase/pollActions";
 import CustomButton from "components/customButton/customButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +22,7 @@ const Poll: React.FC = () => {
     const [selectedParticipant, setSelectedParticipant] = useState<string | null>(
         () => localStorage.getItem("selectedParticipant")
     );
+    const [participantColor, setParticipantColor] = useState<string | null>(null);
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
     const [votes, setVotes] = useState<Votes>({});
     const [voteRecords, setVoteRecords] = useState<VoteRecord[]>([]);
@@ -47,7 +48,13 @@ const Poll: React.FC = () => {
         setVotes({});
         setVoteRecords([]);
         setVotedColors([]);
-        fetchVoteRecords();
+        setParticipantColor(null);
+        if (selectedParticipant) {
+            fetchVoteRecords();
+            getParticipantColor(selectedParticipant).then(({ data, error }) => {
+                if (!error && data?.color) setParticipantColor(data.color);
+            });
+        }
     }, [selectedParticipant]);
 
     const handleParticipantSelect = (name: string) => {
@@ -111,6 +118,7 @@ const Poll: React.FC = () => {
                     selectables={colors}
                     handleSelect={handleColorSelect}
                     votedColors={votedColors}
+                    disabledColor={participantColor}
                 />
             )}
 
