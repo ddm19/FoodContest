@@ -6,6 +6,7 @@ import NoPage from "./pages/notFound/notFound";
 import { Routes, Route } from "react-router-dom";
 import Raffle from "pages/raffle/raffle";
 import Poll from "pages/poll/poll";
+import Results from "pages/results/results";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/raffle" element={<Raffle />} />
           <Route path="/poll" element={<Poll />} />
+          <Route path="/results" element={<Results />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </main>
