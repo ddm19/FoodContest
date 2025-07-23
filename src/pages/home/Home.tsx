@@ -2,37 +2,59 @@ import CustomButton from "components/customButton/customButton";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import supabase from "supabase/supabase";
-import { participants } from "pages/poll/constants";
-import { colors } from "pages/poll/constants"; 
+import { getParticipantVotes } from "supabase/pollActions";
+import { VoteRecord } from "pages/poll/poll";
+import { colors, participants } from "pages/poll/constants";
+import ParticipantIcon from "./components/participantIcon";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const [allVotesDone, setAllVotesDone] = useState(false);
+  const initialVotes: { [key: string]: VoteRecord[] } = {
+    ...Object.fromEntries(participants.map(participant => [participant.name, []]))
+
+  };
+  const [participantVotes, setParticipantVotes] = useState<{ [key: string]: VoteRecord[] }>(initialVotes);
+
+
+  const allVotesDone = (votes: { [key: string]: VoteRecord[] }) => {
+    if (!votes || Object.keys(votes).length === 0) return false;
+    return Object.entries(votes).every(([_participant, voteRecords]) => {
+      const votedColors = voteRecords.map(record => record.voteColor);
+      return votedColors.length === colors.length - 1
+    });
+  }
 
   useEffect(() => {
-    const checkVotes = async () => {
-      const { data, error } = await supabase.from("Votes").select("*");
-      if (!error && data) {
-        const votesMap: Record<string, Set<string>> = {};
-        participants.forEach((p) => {
-          votesMap[p.name] = new Set();
-        });
-        data.forEach((v: any) => {
-          if (votesMap[v.participant]) {
-            votesMap[v.participant].add(v.voteColor);
+    const interval = setInterval(() => {
+      getParticipantVotes()
+        .then((response) => {
+          if (response) {
+            setParticipantVotes(prevVotes => ({ ...prevVotes, ...response }));
+          } else {
+            console.error("Invalid response received from getParticipantVotes");
           }
+          console.log(allVotesDone(response || {}));
+        })
+        .catch((error) => {
+          console.error("Error fetching participant votes:", error);
         });
-        const allDone = participants.every((p) => {
-          return (
-            votesMap[p.name] &&
-            colors.every((c) => votesMap[p.name].has(c.name))
-          );
-        });
-        setAllVotesDone(allDone);
-      }
-    };
-    checkVotes();
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    getParticipantVotes()
+      .then((response) => {
+        if (response)
+          setParticipantVotes(prevVotes => ({ ...prevVotes, ...response }));
+        else
+          console.error("Invalid response received from getParticipantVotes");
+        console.log(allVotesDone(response || {}));
+      })
+      .catch((error) => {
+        console.error("Error fetching participant votes:", error);
+      });
   }, []);
 
   return (
@@ -62,13 +84,24 @@ const Home: React.FC = () => {
         <CustomButton
           variant="text"
           color="primary"
-          className="home__sectionButton"
-          disabled={!allVotesDone}
+          className="home__sectionButton home__sectionButton--results"
+          disabled={!allVotesDone(participantVotes)}
           onClick={() => {
             navigate("/results");
           }}
         >
           RESULTADOS
+          <div className="home__participantsResultsContainer">
+            {Object.entries(participantVotes).map(([participant, voteRecords]) =>
+              voteRecords.length < colors.length - 1 ?
+                <ParticipantIcon
+                  key={participant}
+                  participant={{ name: participant, votes: voteRecords.length, img: participants.find(p => p.name === participant)?.img || "" }}
+                />
+                : null
+            )}
+          </div>
+
         </CustomButton>
       </div>
     </div>

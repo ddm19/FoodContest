@@ -32,3 +32,49 @@ export const getParticipantColor = (participant: string) =>
         .single()
         
 }
+export const getAllVotes = () =>
+{
+    return supabase.from('Votes').select('*')
+}
+
+interface Vote {
+    participant: string;
+    voteColor: string;
+    flavour: number;
+    presentation: number;
+    fidelity: number;
+    originality: number;
+}
+
+function wrapVotesByParticipant(votes: Vote[]) {
+    return votes.reduce((acc, vote) => {
+        if (!acc[vote.participant]) {
+            acc[vote.participant] = [];
+        }
+            acc[vote.participant].push({
+                voteColor: vote.voteColor,
+                flavour: vote.flavour,
+                presentation: vote.presentation,
+                fidelity: vote.fidelity,
+                originality: vote.originality,
+            });
+        return acc;
+    }, {} as Record<string, VoteRecord[]>);
+} 
+
+export const getParticipantVotes = async () =>
+{
+    const { data, error } = await supabase.from('Votes').select('*')
+        .not('voteColor', 'is', null)
+        .not('flavour', 'is', null)
+        .not('presentation', 'is', null)
+        .not('fidelity', 'is', null)
+        .not('originality', 'is', null)
+   
+    console.log("getParticipantVotes", data, error);
+    if (error) {
+        console.error("Error fetching votes:", error)
+        return false
+    }
+    return wrapVotesByParticipant(data || []);
+}

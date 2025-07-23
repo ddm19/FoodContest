@@ -21,46 +21,86 @@
         align-items: center;
         justify-items: center;
         height: 100%;
+
+        @media (max-width: 700px)
+        {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(3, auto);
+            padding: var(--spacing-3);
+        }
     }
 
-    &__sectionButton {
+    &__sectionButton
+    {
         width: 50%;
         height: var(--input-size-8);
         border-color: var(--color-primary);
         box-shadow: none;
         transition: box-shadow 0.3s, border-color 0.3s, color 0.3s;
 
-        @media (max-width: 700px) {
+        @media (max-width: 700px)
+        {
             width: 90%;
             height: var(--input-size-6);
         }
-    }
 
-    &__sectionButton:nth-child(1) {
-        grid-column: 1;
-        grid-row: 1;
-    }
-    &__sectionButton:nth-child(2) {
-        grid-column: 2;
-        grid-row: 1;
-    }
-    &__sectionButton:nth-child(3) {
-        grid-column: 1 / span 2;
-        grid-row: 2;
-        justify-self: center;
-        width: 25%;
-        box-shadow: 0 0 12px 2px var(--color-primary), 0 0 0 0 #0ABAB500;
-        animation: enabledGlow 1.5s infinite alternate;
-
-        @media (max-width: 700px) {
-            width: 50%;
+        &--results
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            gap: var(--spacing-2);
         }
     }
 
-    &__sectionButton:nth-child(3):disabled {
-        color: #7da0b6 !important;
-        border-color: #b65c5c !important;
-        box-shadow: 0 0 12px 2px #b65c5c, 0 0 0 0 #b65c5c00;
+    &__participantsResultsContainer
+    {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-2);
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+    }
+
+    &__sectionButton:nth-child(1)
+    {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    &__sectionButton:nth-child(2)
+    {
+        grid-column: 2;
+        grid-row: 1;
+
+    }
+
+    &__sectionButton:nth-child(3)
+    {
+        grid-column: 1 / span 2;
+        grid-row: 2;
+        justify-self: center;
+        width: 55%;
+        box-shadow: 0 0 12px 2px var(--color-primary), 0 0 0 0 var(--color-black);
+        animation: enabledGlow 1.5s infinite alternate;
+
+        @media (max-width: 700px)
+        {
+            width: 90%;
+
+        }
+    }
+
+    &__sectionButton:nth-child(3):disabled
+    {
+        color: var(--color-primary);
+        border-color: var(--color-red);
+        box-shadow: 0 0 12px 2px var(--color-red), 0 0 0 0 var(--color-black);
         animation: apagadoGlow 1.5s infinite alternate;
         cursor: not-allowed;
         background: inherit;
@@ -68,9 +108,10 @@
         opacity: 1;
     }
 
-    &__sectionButton:disabled {
-        color: #7da0b6 !important;
-        border-color: #b65c5c !important;
+    &__sectionButton:disabled
+    {
+        color: var(--color-red);
+        border-color: var(--color-red);
         box-shadow: none;
         animation: none;
         cursor: not-allowed;
@@ -79,21 +120,29 @@
         opacity: 1;
     }
 
-    @keyframes enabledGlow {
-        0% {
-            box-shadow: 0 0 12px 2px #0ABAB5, 0 0 0 0 #0ABAB500;
+    @keyframes enabledGlow
+    {
+        0%
+        {
+            box-shadow: 0 0 12px 2px var(--color-primary), 0 0 0 0 var(--color-black);
         }
-        100% {
-            box-shadow: 0 0 24px 6px #0ABAB588, 0 0 0 0 #0ABAB500;
+
+        100%
+        {
+            box-shadow: 0 0 24px 6px var(--color-primary), 0 0 0 0 var(--color-black);
         }
     }
 
-    @keyframes apagadoGlow {
-        0% {
-            box-shadow: 0 0 12px 2px #b65c5c, 0 0 0 0 #b65c5c00;
+    @keyframes apagadoGlow
+    {
+        0%
+        {
+            box-shadow: 0 0 12px 2px var(--color-red), 0 0 0 0 var(--color-black);
         }
-        100% {
-            box-shadow: 0 0 24px 6px #b65c5c88, 0 0 0 0 #b65c5c00;
+
+        100%
+        {
+            box-shadow: 0 0 24px 6px var(--color-red), 0 0 0 0 var(--color-black);
         }
     }
 }
