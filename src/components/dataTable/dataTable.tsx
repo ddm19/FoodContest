@@ -57,10 +57,14 @@ const DataTable = <T extends Record<string, any>>({
     return sortableData;
   }, [data, sortBy, sortOrder]);
 
-  const removeBlurredClass = (rowIndex: number, colIndex: number) => {
-    const cell = document.getElementById(`dataTable__blurred-${rowIndex}-${colIndex}`);
+  const removeBlurredClass = (rowIndex: number) => {
+    const cell = document.getElementById(`dataTable__blurred-${rowIndex}`);
     if (cell) {
-      cell.classList.remove('dataTable__blurred');
+      cell.classList.add('dataTable__unblurred');
+      setTimeout(() => {
+        cell.classList.remove('dataTable__blurred');
+        cell.classList.remove('dataTable__unblurred');
+      }, 500);
     }
   };
 
@@ -80,30 +84,27 @@ const DataTable = <T extends Record<string, any>>({
         </thead>
         <tbody className="dataTable__tbody">
           {sortedData.map((row, rowIndex) => (
-            <tr key={rowIndex} className="dataTable__row">
-              {columns.map((column, colIndex) => {
-                const cellProps: { 'data-color'?: string } = {};
-                if (column.dataColorAccessor && row[column.dataColorAccessor]) {
-                  cellProps['data-color'] = row[column.dataColorAccessor];
-                }
+            <tr key={rowIndex} className={`dataTable__row dataTable__blurred`}
+              onClick={() => removeBlurredClass(rowIndex)}
+              id={`dataTable__blurred-${rowIndex}`}
+            >              {columns.map((column, colIndex) => {
+              const cellProps: { 'data-color'?: string } = {};
+              if (column.dataColorAccessor && row[column.dataColorAccessor]) {
+                cellProps['data-color'] = row[column.dataColorAccessor];
+              }
 
-                return (
-                  <td
-                    key={`${rowIndex}-${colIndex}`}
-                    className="dataTable__cell"
-                    {...cellProps}
-                    onClick={() => removeBlurredClass(rowIndex, colIndex)}
-                  >
-                    {column.accessor === sortBy ? (
-                      <span className='dataTable__blurred' id={`dataTable__blurred-${rowIndex}-${colIndex}`}>
-                        {column.render ? column.render(row) : String(row[column.accessor])}
-                      </span>
-                    ) : (
-                      column.render ? column.render(row) : String(row[column.accessor])
-                    )}
-                  </td>
-                );
-              })}
+              return (
+                <td
+                  key={`${rowIndex}-${colIndex}`}
+                  className={`dataTable__cell`}
+                  {...cellProps}
+
+                >
+                  {column.render ? column.render(row) : String(row[column.accessor])}
+
+                </td>
+              );
+            })}
             </tr>
           ))}
         </tbody>
