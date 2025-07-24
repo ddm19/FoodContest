@@ -9,7 +9,6 @@ export interface Team {
     members: string[];
 }
 
-// Interfaz para los datos de la tabla de resultados
 interface ResultData extends Team {
     color: string;
 }
@@ -18,7 +17,6 @@ export type Assignments = Record<string, string>;
 
 const colors = ['Amarillo', 'Naranja', 'Rojo', 'Marrón', 'Verde', 'Blanco', 'Rosa'];
 
-// Columnas para la tabla de participantes
 const participantColumns: Column<Team>[] = [
     {
         header: 'Equipo',
@@ -27,11 +25,10 @@ const participantColumns: Column<Team>[] = [
     {
         header: 'Miembros',
         accessor: 'members',
-        render: (row) => row.members.join(' y '), // Usamos render para formato personalizado
+        render: (row) => row.members.join(' y '),
     },
 ];
 
-// Columnas para la tabla de resultados
 const resultsColumns: Column<ResultData>[] = [
     {
         header: 'Equipo',
@@ -40,7 +37,7 @@ const resultsColumns: Column<ResultData>[] = [
     {
         header: 'Color asignado',
         accessor: 'color',
-        dataColorAccessor: 'color', // Indicamos qué campo usar para el data-color
+        dataColorAccessor: 'color',
     },
 ];
 
@@ -72,10 +69,9 @@ const Raffle: React.FC = () => {
         }, 5000);
     };
 
-    // Preparamos los datos para la tabla de resultados
     const resultsData: ResultData[] = teams.map((team) => ({
         ...team,
-        color: fixedAssignments[team.name] || '', // Añadimos el color al objeto
+        color: fixedAssignments[team.name] || '',
     }));
 
     return (
@@ -85,7 +81,6 @@ const Raffle: React.FC = () => {
                     <h2 className="raffle__title">Colores Disponibles</h2>
 
                     <div className='raffle__colors'>
-                        {/* Esto se mantiene igual ya que no es una tabla */}
                         {colors.map((color) => (
                             <div key={color} className="raffle__cell" data-color={color}>
                                 {color}
@@ -93,7 +88,6 @@ const Raffle: React.FC = () => {
                         ))}
                     </div>
 
-                    {/* Usamos el nuevo componente DataTable */}
                     <DataTable
                         title="Participantes"
                         columns={participantColumns}
@@ -101,11 +95,9 @@ const Raffle: React.FC = () => {
                         className="raffle__tableContainer"
                     />
 
-                    {/* <CustomButton className="raffle__button" onClick={() => handleRaffle()}>Hacer sorteo</CustomButton> */}
 
                     {Object.keys(fixedAssignments).length > 0 && (
                         <div className="raffle__results">
-                            {/* Usamos el nuevo componente DataTable también para los resultados */}
                             <DataTable
                                 title="Resultados"
                                 columns={resultsColumns}

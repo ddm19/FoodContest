@@ -1,18 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './dataTable.scss';
 
-/**
- * Define la estructura de una columna para el DataTable.
- * @template T El tipo de dato de la fila.
- */
 export interface Column<T> {
-  /** El texto a mostrar en la cabecera de la columna. */
   header: string;
-  /** La clave del objeto de datos para acceder al valor de la celda. */
   accessor: keyof T;
-  /** (Opcional) Una función para renderizar contenido personalizado en la celda. */
   render?: (row: T) => React.ReactNode;
-  /** (Opcional) La clave del objeto de datos cuyo valor se usará para el atributo data-color. */
   dataColorAccessor?: keyof T;
 }
 
@@ -21,32 +13,59 @@ export interface Column<T> {
  * @template T El tipo de dato de la fila.
  */
 interface DataTableProps<T> {
-  /** (Opcional) Título que se muestra encima de la tabla. */
   title?: string;
-  /** Array de objetos que definen las columnas de la tabla. */
   columns: Column<T>[];
-  /** Array con los datos a mostrar en las filas. */
   data: T[];
-  /** (Opcional) Clase CSS adicional para el contenedor principal. */
   className?: string;
+  sortBy?: keyof T;
+  sortOrder?: 'asc' | 'desc';
+  isBlurred?: boolean;
 }
 
-/**
- * Un componente de tabla genérico y reutilizable.
- *
- * @template T El tipo de los objetos de datos que se mostrarán en la tabla.
- * @param {DataTableProps<T>} props Las propiedades del componente.
- * @returns Un elemento React que renderiza una tabla.
- */
 const DataTable = <T extends Record<string, any>>({
   title,
   columns,
   data,
   className = '',
+  sortBy,
+  sortOrder = 'desc',
 }: DataTableProps<T>): React.ReactElement => {
+
+
+  const sortedData = useMemo(() => {
+    if (!sortBy) {
+      return data;
+    }
+
+    const sortableData = [...data];
+
+    sortableData.sort((a, b) => {
+      const valA = a[sortBy];
+      const valB = b[sortBy];
+
+      if (typeof valA === 'number' && typeof valB === 'number') {
+        return sortOrder === 'asc' ? valA - valB : valB - valA;
+      }
+
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return sortOrder === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      }
+
+      return 0;
+    });
+
+    return sortableData;
+  }, [data, sortBy, sortOrder]);
+
+  const removeBlurredClass = (rowIndex: number, colIndex: number) => {
+    const cell = document.getElementById(`dataTable__blurred-${rowIndex}-${colIndex}`);
+    if (cell) {
+      cell.classList.remove('dataTable__blurred');
+    }
+  };
+
   return (
     <div className={`dataTableContainer ${className}`}>
-      {/* Renderiza el título si se proporciona */}
       {title && <h1 className="dataTableContainer__title">{title}</h1>}
 
       <table className="dataTable">
@@ -60,10 +79,9 @@ const DataTable = <T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody className="dataTable__tbody">
-          {data.map((row, rowIndex) => (
+          {sortedData.map((row, rowIndex) => (
             <tr key={rowIndex} className="dataTable__row">
               {columns.map((column, colIndex) => {
-                // Prepara los props para la celda, incluyendo el data-color si es necesario
                 const cellProps: { 'data-color'?: string } = {};
                 if (column.dataColorAccessor && row[column.dataColorAccessor]) {
                   cellProps['data-color'] = row[column.dataColorAccessor];
@@ -74,9 +92,15 @@ const DataTable = <T extends Record<string, any>>({
                     key={`${rowIndex}-${colIndex}`}
                     className="dataTable__cell"
                     {...cellProps}
+                    onClick={() => removeBlurredClass(rowIndex, colIndex)}
                   >
-                    {/* Usa la función de renderizado si existe, si no, muestra el valor del accesor */}
-                    {column.render ? column.render(row) : String(row[column.accessor])}
+                    {column.accessor === sortBy ? (
+                      <span className='dataTable__blurred' id={`dataTable__blurred-${rowIndex}-${colIndex}`}>
+                        {column.render ? column.render(row) : String(row[column.accessor])}
+                      </span>
+                    ) : (
+                      column.render ? column.render(row) : String(row[column.accessor])
+                    )}
                   </td>
                 );
               })}
@@ -89,4 +113,3 @@ const DataTable = <T extends Record<string, any>>({
 };
 
 export default DataTable;
-

@@ -1,3 +1,4 @@
+import DataTable from "components/dataTable/dataTable";
 
 export enum Category {
     flavour = "Sabor",
@@ -6,26 +7,36 @@ export enum Category {
     originality = "Originalidad",
 }
 
+
 interface ResultsPanelProps {
     category: Category;
     votes: Array<{ [key: string]: number }>;
 }
 
 const ResultsPanel = (props: ResultsPanelProps) => {
+
+    const { category, votes } = props;
+    if (!votes || votes.length === 0) {
+        return <div>No hay votos para mostrar en esta categoría.</div>;
+    }
+    // Prepara los datos para la tabla
+    const data = votes.map((vote) => ({
+        voteColor: vote.voteColor,
+        [category]: vote[Object.keys(Category).find(key => Category[key as keyof typeof Category] === category)!],
+    }));
+
     return (
         <div>
-            <h2>Resultados para la categoría: {props.category}</h2>
-            <ul>
-                {props.votes.map((vote, index) => (
-                    <li key={index}>
-                        {Object.entries(vote).map(([option, count]) => (
-                            <div key={option}>
-                                {option}: {count} votos
-                            </div>
-                        ))}
-                    </li>
-                ))}
-            </ul>
+            <DataTable
+                title={`Resultados de la categoría ${category}`}
+                columns={[
+                    { header: "Color", accessor: "voteColor" },
+                    { header: "Puntuación", accessor: category, dataColorAccessor: "voteColor" },
+                ]}
+                data={data}
+                className="resultsPanel__tableContainer"
+                sortBy={category}
+            />
         </div>
     );
 };

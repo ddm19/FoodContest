@@ -78,16 +78,15 @@ export const getParticipantVotes = async () =>
     return wrapVotesByParticipant(data || []);
 }
 
-export const getVotesByColorAndCategory = async (color: string, category: string) : Promise<any> =>
+export const getVotesByColorAndCategory = async (color: Array<string>, category: string) : Promise<any> =>
 {
-    //  votes by color
     const { data, error } = await supabase
   .from('Votes')
   .select(`
     voteColor,
     ${category}:${category}.sum()
   `)
-  .eq('voteColor', color);
+  .in('voteColor', color);
 
     if (error) {
         console.error("Error fetching votes:", error)
