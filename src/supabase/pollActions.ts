@@ -71,10 +71,27 @@ export const getParticipantVotes = async () =>
         .not('fidelity', 'is', null)
         .not('originality', 'is', null)
    
-    console.log("getParticipantVotes", data, error);
     if (error) {
         console.error("Error fetching votes:", error)
         return false
     }
     return wrapVotesByParticipant(data || []);
+}
+
+export const getVotesByColorAndCategory = async (color: string, category: string) : Promise<any> =>
+{
+    //  votes by color
+    const { data, error } = await supabase
+  .from('Votes')
+  .select(`
+    voteColor,
+    ${category}:${category}.sum()
+  `)
+  .eq('voteColor', color);
+
+    if (error) {
+        console.error("Error fetching votes:", error)
+        return false
+    }
+    return data || [];
 }

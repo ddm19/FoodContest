@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import Raffle from "pages/raffle/raffle";
 import Poll from "pages/poll/poll";
 import Results from "pages/results/results";
+import TestResults from "pages/results/testresults";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/raffle" element={<Raffle />} />
           <Route path="/poll" element={<Poll />} />
-          <Route path="/results" element={<Results />} />
+          <Route path="/results" element={<TestResults />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </main>

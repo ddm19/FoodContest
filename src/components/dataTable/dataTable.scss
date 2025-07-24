@@ -1,0 +1,125 @@
+// dataTable.scss
+
+.dataTableContainer
+{
+    width: 80%;
+
+    &__title
+    {
+        color: var(--color-text);
+        margin-bottom: var(--spacing-2);
+        text-align: center;
+    }
+
+    @media (max-width: 768px)
+    {
+
+        width: 100%;
+        margin: var(--spacing-2) 0;
+    }
+}
+
+.dataTable
+{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-background);
+
+    &__thead
+    {
+        background-color: var(--color-primary-low-opacity);
+    }
+
+    &__row
+    {
+        border-color: var(--color-border, var(--color-text-secondary));
+        transition: background-color 0.2s ease-in-out;
+
+        &:last-child
+        {
+            border-bottom: none;
+        }
+
+        &:hover
+        {
+            background-color: var(--color-border);
+        }
+    }
+
+    &__cell
+    {
+        padding: var(--spacing-2) var(--spacing-3);
+        text-align: left;
+        color: var(--color-text);
+
+        &--header
+        {
+            font-weight: bold;
+        }
+
+        &[data-color='Amarillo']
+        {
+            background-color: var(--color-yellow);
+            color: var(--color-black);
+        }
+
+        &[data-color='Naranja']
+        {
+            background-color: var(--color-orange);
+            color: var(--color-black);
+        }
+
+        &[data-color='Rojo']
+        {
+            background-color: var(--color-red);
+            color: var(--color-white);
+        }
+
+        &[data-color='Marrón']
+        {
+            background-color: var(--color-brown);
+            color: var(--color-black);
+        }
+
+        &[data-color='Verde']
+        {
+            background-color: var(--color-green);
+            color: var(--color-white);
+        }
+
+        &[data-color='Blanco']
+        {
+            background-color: var(--color-white);
+            color: var(--color-black);
+        }
+
+        &[data-color='Rosa']
+        {
+            background-color: var(--color-pink);
+            color: var(--color-white);
+        }
+    }
+}
+
+.dark-mode
+{
+    .dataTable
+    {
+        background-color: var(--color-surface);
+
+        &__thead
+        {
+            background-color: var(--color-primary-low-opacity);
+        }
+
+        &__row
+        {
+            border-color: var(--color-border, var(--color-text-secondary));
+
+            &:hover
+            {
+                background-color: var(--color-border);
+            }
+        }
+    }
+}
