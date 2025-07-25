@@ -1,5 +1,14 @@
 .customTabsPanel
 {
+  max-width: 100%;
+  margin: var(--spacing-2) 0;
+
+
+  @media (max-width: 768px)
+  {
+    width: 80%;
+  }
+
   &__customTab[role="tab"]
   {
     background-color: var(--color-accent);

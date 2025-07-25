@@ -40,7 +40,7 @@ const ResultsPanel = (props: ResultsPanelProps) => {
             </h1>
             <DataTable
                 columns={[
-                    { header: "Color", accessor: "voteColor" },
+                    { header: "Color", accessor: "voteColor", dataColorAccessor: "voteColor" },
                     { header: "Puntuación", accessor: category !== "Final" ? category : "finalScore", dataColorAccessor: "voteColor" },
                 ]}
                 data={data}
