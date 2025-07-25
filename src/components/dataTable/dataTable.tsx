@@ -29,6 +29,7 @@ const DataTable = <T extends Record<string, any>>({
   className = '',
   sortBy,
   sortOrder = 'desc',
+  isBlurred = false,
 }: DataTableProps<T>): React.ReactElement => {
 
 
@@ -84,27 +85,27 @@ const DataTable = <T extends Record<string, any>>({
         </thead>
         <tbody className="dataTable__tbody">
           {sortedData.map((row, rowIndex) => (
-            <tr key={rowIndex} className={`dataTable__row dataTable__blurred`}
-              onClick={() => removeBlurredClass(rowIndex)}
-              id={`dataTable__blurred-${rowIndex}`}
-            >              {columns.map((column, colIndex) => {
-              const cellProps: { 'data-color'?: string } = {};
-              if (column.dataColorAccessor && row[column.dataColorAccessor]) {
-                cellProps['data-color'] = row[column.dataColorAccessor];
-              }
+            <tr key={rowIndex} 
+              className={`dataTable__row ${isBlurred ? 'dataTable__blurred' : ''}`}
+              onClick={isBlurred ? () => removeBlurredClass(rowIndex) : undefined}
+              id={isBlurred ? `dataTable__blurred-${rowIndex}` : undefined}
+            >
+              {columns.map((column, colIndex) => {
+                const cellProps: { 'data-color'?: string } = {};
+                if (column.dataColorAccessor && row[column.dataColorAccessor]) {
+                  cellProps['data-color'] = row[column.dataColorAccessor];
+                }
 
-              return (
-                <td
-                  key={`${rowIndex}-${colIndex}`}
-                  className={`dataTable__cell`}
-                  {...cellProps}
-
-                >
-                  {column.render ? column.render(row) : String(row[column.accessor])}
-
-                </td>
-              );
-            })}
+                return (
+                  <td
+                    key={`${rowIndex}-${colIndex}`}
+                    className={`dataTable__cell`}
+                    {...cellProps}
+                  >
+                    {column.render ? column.render(row) : String(row[column.accessor])}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
