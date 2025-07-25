@@ -17,6 +17,8 @@ export interface TabItem {
 const CustomTabs = (props: TabsProps) => {
   const { tabs } = props;
   const [value, setValue] = useState(0);
+  const isMobile = window.innerWidth <= 768;
+
 
   const handleChange = (
     _event: React.SyntheticEvent<Element, Event>,
@@ -27,7 +29,7 @@ const CustomTabs = (props: TabsProps) => {
 
   return (
     <>
-      <Tabs value={value} onChange={handleChange} className="customTabsPanel">
+      <Tabs value={value} onChange={handleChange} className="customTabsPanel" centered={isMobile} scrollButtons="auto" variant="scrollable">
         {tabs.map((tab, index) => (
           <Tab
             key={index}

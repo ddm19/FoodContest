@@ -1,0 +1,183 @@
+// dataTable.scss
+
+.dataTableContainer
+{
+    width: 80%;
+
+    &__title
+    {
+        color: var(--color-text);
+        margin-bottom: var(--spacing-2);
+        text-align: center;
+    }
+
+    @media (max-width: 768px)
+    {
+
+        width: 100%;
+        margin: var(--spacing-2) 0;
+    }
+}
+
+.dataTable
+{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-background);
+
+    &__thead
+    {
+        background-color: var(--color-primary-low-opacity);
+    }
+
+    &__row
+    {
+        border-color: var(--color-border, var(--color-text-secondary));
+        transition: background-color 0.2s ease-in-out;
+
+        &:last-child
+        {
+            border-bottom: none;
+        }
+
+        &:hover
+        {
+            background-color: var(--color-border);
+        }
+    }
+
+    &__cell
+    {
+        padding: var(--spacing-2) var(--spacing-3);
+        text-align: left;
+        color: var(--color-text);
+        font-size: var(--font-size-7);
+
+        &--header
+        {
+            font-weight: bold;
+        }
+
+        &[data-color='Amarillo']
+        {
+            background-color: var(--color-yellow);
+            color: var(--color-black);
+        }
+
+        &[data-color='Naranja']
+        {
+            background-color: var(--color-orange);
+            color: var(--color-black);
+        }
+
+        &[data-color='Rojo']
+        {
+            background-color: var(--color-red);
+            color: var(--color-white);
+        }
+
+        &[data-color='Marrón']
+        {
+            background-color: var(--color-brown);
+            color: var(--color-black);
+        }
+
+        &[data-color='Verde']
+        {
+            background-color: var(--color-green);
+            color: var(--color-white);
+        }
+
+        &[data-color='Blanco']
+        {
+            background-color: var(--color-white);
+            color: var(--color-black);
+        }
+
+        &[data-color='Rosa']
+        {
+            background-color: var(--color-pink);
+            color: var(--color-white);
+        }
+
+    }
+
+    &__blurred
+    {
+        color: var(--color-text-secondary);
+        opacity: 0.2;
+        filter: blur(10px) contrast(0.5);
+        transition: opacity 0.2s ease-in-out;
+        width: 100%;
+
+        td,
+        .dataTable__cell
+        {
+            background-color: var(--color-background)
+        }
+
+
+    }
+
+    &__unblurred
+    {
+        opacity: 1;
+        filter: none;
+        animation: unblur 0.6s ease-in-out forwards;
+        transition: opacity .6s ease-in-out;
+        width: 100%;
+
+
+    }
+
+    @keyframes unblur
+    {
+        0%
+        {
+            opacity: 0.2;
+            filter: blur(10px) contrast(0.5);
+            transform: scale(0.95);
+        }
+
+        50%
+        {
+            opacity: 1;
+            filter: none;
+            transform: scale(1);
+        }
+
+        100%
+        {
+            opacity: 1;
+            filter: none;
+            transform: scale(1.05);
+        }
+    }
+
+
+
+
+}
+
+.dark-mode
+{
+    .dataTable
+    {
+        background-color: var(--color-surface);
+
+        &__thead
+        {
+            background-color: var(--color-primary-low-opacity);
+        }
+
+        &__row
+        {
+            border-color: var(--color-border, var(--color-text-secondary));
+
+            &:hover
+            {
+                background-color: var(--color-border);
+            }
+        }
+    }
+}
