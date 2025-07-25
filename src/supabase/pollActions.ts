@@ -94,3 +94,16 @@ export const getVotesByColorAndCategory = async (color: Array<string>, category:
     }
     return data || [];
 }
+
+export const getVotesByColorSummary = async () : Promise<any> =>
+{
+    const { data, error } = await supabase
+        .rpc('get_vote_scores').select('*');
+
+    if (error) {
+        console.error("Error fetching votes:", error);
+        return false;
+    }
+
+    return data || [];
+}

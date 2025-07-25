@@ -132,16 +132,25 @@
 
     @keyframes unblur
     {
-        from
+        0%
         {
             opacity: 0.2;
             filter: blur(10px) contrast(0.5);
+            transform: scale(0.95);
         }
 
-        to
+        50%
         {
             opacity: 1;
             filter: none;
+            transform: scale(1);
+        }
+
+        100%
+        {
+            opacity: 1;
+            filter: none;
+            transform: scale(1.05);
         }
     }
 

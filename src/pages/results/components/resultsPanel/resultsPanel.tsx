@@ -1,15 +1,17 @@
 import DataTable from "components/dataTable/dataTable";
+import "./resultsPanel.scss";
 
 export enum Category {
     flavour = "Sabor",
     presentation = "Presentación",
     fidelity = "Fidelidad",
     originality = "Originalidad",
+
 }
 
 
 interface ResultsPanelProps {
-    category: Category;
+    category: Category | "Final";
     votes: Array<{ [key: string]: number }>;
 }
 
@@ -20,24 +22,32 @@ const ResultsPanel = (props: ResultsPanelProps) => {
         return <div>No hay votos para mostrar en esta categoría.</div>;
     }
     // Prepara los datos para la tabla
-    const data = votes.map((vote) => ({
+    let data = votes.map((vote) => ({
         voteColor: vote.voteColor,
         [category]: vote[Object.keys(Category).find(key => Category[key as keyof typeof Category] === category)!],
     }));
+    if (category === "Final") {
+        data = votes.map((vote) => ({
+            voteColor: vote.voteColor,
+            finalScore: vote.finalscore
+        }));
+    }
 
     return (
-        <div>
+        <>
+            <h1 className="resultsPanel__title">
+                Resultados de la categoría <span className="resultsPanel__title--highlight">{category}</span>
+            </h1>
             <DataTable
-                title={`Resultados de la categoría ${category}`}
                 columns={[
                     { header: "Color", accessor: "voteColor" },
-                    { header: "Puntuación", accessor: category, dataColorAccessor: "voteColor" },
+                    { header: "Puntuación", accessor: category !== "Final" ? category : "finalScore", dataColorAccessor: "voteColor" },
                 ]}
                 data={data}
                 className="resultsPanel__tableContainer"
                 sortBy={category}
             />
-        </div>
+        </>
     );
 };
 export default ResultsPanel;
