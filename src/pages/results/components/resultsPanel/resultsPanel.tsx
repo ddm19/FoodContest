@@ -46,6 +46,7 @@ const ResultsPanel = (props: ResultsPanelProps) => {
                 data={data}
                 className="resultsPanel__tableContainer"
                 sortBy={category}
+                isBlurred={true}
             />
         </>
     );
