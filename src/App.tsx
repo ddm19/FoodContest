@@ -22,6 +22,7 @@ function App() {
           <Route path="/raffle" element={<Raffle />} />
           <Route path="/poll" element={<Poll />} />
           <Route path="/results" element={<TestResults />} />
+          <Route path="/backupresults" element={<Results />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </main>

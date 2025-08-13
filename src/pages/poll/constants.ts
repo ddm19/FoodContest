@@ -48,7 +48,6 @@ export const participants = [
     { name: "Marcos", img: "marcos.jpeg" },
     { name: "Assem", img: "assem.jpeg" },
     { name: "Moru", img: "moru.jpeg" },
-    { name: "Jorge", img: "jorge.png" },
     { name: "Guti", img: "guti.jpeg" },
     { name: "Javilo", img: "javilo.jpeg" },
     { name: "Ana", img: "ana.jpeg" },
@@ -73,7 +72,7 @@ export const teams: Team[] = [
     { name: 'Tortugos', members: ['Ani', 'Javilo'] },
     { name: 'Intolerantes', members: ['Marc', 'Mery'] },
     { name: 'Choripanes Racistas', members: ['Dani', 'Brisa'] },
-    { name: 'No sabemos cocinar', members: ['Guti', 'Jorge', 'Moru'] },
+    { name: 'No sabemos cocinar', members: ['Guti', 'Moru'] },
     { name: 'No hay Derecho', members: ['Antonio', 'Noelia'] },
 ];
 
