@@ -11,6 +11,7 @@ const Home: React.FC = () => {
       title: "Letras 2026",
       content: (
         <ContestSection
+          key="letters"
           raffleRoute="/raffle-letters"
           pollRoute="/poll-letters"
           resultsRoute="/results-letters"
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
       title: "Colores 2025",
       content: (
         <ContestSection
+          key="colors"
           raffleRoute="/raffle"
           pollRoute="/poll"
           resultsRoute="/results"
