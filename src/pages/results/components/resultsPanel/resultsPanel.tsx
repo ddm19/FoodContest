@@ -13,22 +13,25 @@ export enum Category {
 interface ResultsPanelProps {
     category: Category | "Final";
     votes: Array<{ [key: string]: number }>;
+    resolveColorToken?: (voteColor: string) => string;
 }
 
 const ResultsPanel = (props: ResultsPanelProps) => {
 
-    const { category, votes } = props;
+    const { category, votes, resolveColorToken = (voteColor: string) => voteColor } = props;
     if (!votes || votes.length === 0) {
         return <div>No hay votos para mostrar en esta categoría.</div>;
     }
     // Prepara los datos para la tabla
     let data = votes.map((vote) => ({
         voteColor: vote.voteColor,
+        colorToken: resolveColorToken(vote.voteColor as unknown as string),
         [category]: vote[Object.keys(Category).find(key => Category[key as keyof typeof Category] === category)!],
     }));
     if (category === "Final") {
         data = votes.map((vote) => ({
             voteColor: vote.voteColor,
+            colorToken: resolveColorToken(vote.voteColor as unknown as string),
             finalScore: vote.finalscore
         }));
     }
@@ -40,8 +43,8 @@ const ResultsPanel = (props: ResultsPanelProps) => {
             </h1>
             <DataTable
                 columns={[
-                    { header: "Color", accessor: "voteColor", dataColorAccessor: "voteColor" },
-                    { header: "Puntuación", accessor: category !== "Final" ? category : "finalScore", dataColorAccessor: "voteColor" },
+                    { header: "Color", accessor: "voteColor", dataColorAccessor: "colorToken" },
+                    { header: "Puntuación", accessor: category !== "Final" ? category : "finalScore", dataColorAccessor: "colorToken" },
                 ]}
                 data={data}
                 className="resultsPanel__tableContainer"

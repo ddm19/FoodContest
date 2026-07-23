@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getVotesByLetterAndCategory, getVotesByLetterSummary, getAssignedLetters } from "supabase/letterActions";
+import { getLetterSpanishColor } from "pages/poll/constants";
 import ResultsPanel, { Category } from "pages/results/components/resultsPanel/resultsPanel";
 import CustomTabs, { TabItem } from "components/customTabs/customTabs";
 import Loading from "components/Loading/Loading";
@@ -50,12 +51,12 @@ const ResultsLetters = () => {
     const finalTab =
     {
         title: "Final",
-        content: <ResultsPanel key="Final" category={"Final"} votes={summaryVotes} />
+        content: <ResultsPanel key="Final" category={"Final"} votes={summaryVotes} resolveColorToken={getLetterSpanishColor} />
     }
 
     const tabs: TabItem[] = Object.entries(votesByCategory).map(([categoryName, votesData]) => ({
         title: categoryName,
-        content: <ResultsPanel key={categoryName} category={categoryName as Category} votes={votesData} />
+        content: <ResultsPanel key={categoryName} category={categoryName as Category} votes={votesData} resolveColorToken={getLetterSpanishColor} />
     })).concat([finalTab]);
 
     return (
