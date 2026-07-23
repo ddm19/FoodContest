@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./poll.scss";
 import GridSelector from "./components/gridSelector";
-import { colors, voteCategories, colorClassMap, participants } from "./constants";
+import { colors, voteCategories, colorClassMap, colorGlowClassMap, participants } from "./constants";
 import VotePanel from "./components/votePanel";
 import { getVotes, getParticipantColor } from "supabase/pollActions";
 import CustomButton from "components/customButton/customButton";
@@ -124,12 +124,14 @@ const Poll: React.FC = () => {
 
             {selectedColor && (
                 <VotePanel
+                    participant={selectedParticipant}
                     votes={votes}
                     setVotes={setVotes}
                     voteCategories={voteCategories}
                     selectedColor={selectedColor}
                     setSelectedColor={setSelectedColor}
                     reloadVotes={fetchVoteRecords}
+                    glowClass={colorGlowClassMap[selectedColor]}
                 />
             )}
         </div>

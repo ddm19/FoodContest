@@ -1,4 +1,3 @@
-import { colors } from "pages/poll/constants";
 import "./participantIcon.scss"
 
 interface Participant {
@@ -9,17 +8,18 @@ interface Participant {
 
 interface ParticipantIconProps {
   participant: Participant;
+  totalToVote: number;
 }
 
 const ParticipantIcon = (props: ParticipantIconProps) => {
-  const { participant } = props;
+  const { participant, totalToVote } = props;
 
   return (
     <div
       className={`participantIcon`}
     >
       <img src={participant.img} alt={participant.name} />
-      <span className="participantIcon__vote">{colors.length - 1 - participant.votes}</span>
+      <span className="participantIcon__vote">{totalToVote - participant.votes}</span>
     </div>
   );
 }

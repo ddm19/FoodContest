@@ -8,6 +8,9 @@ import Raffle from "pages/raffle/raffle";
 import Poll from "pages/poll/poll";
 import Results from "pages/results/results";
 import TestResults from "pages/results/testresults";
+import RaffleLetters from "pages/raffleLetters/raffleLetters";
+import PollLetters from "pages/pollLetters/pollLetters";
+import ResultsLetters from "pages/resultsLetters/resultsLetters";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
           <Route path="/poll" element={<Poll />} />
           <Route path="/results" element={<TestResults />} />
           <Route path="/backupresults" element={<Results />} />
+          <Route path="/raffle-letters" element={<RaffleLetters />} />
+          <Route path="/poll-letters" element={<PollLetters />} />
+          <Route path="/results-letters" element={<ResultsLetters />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </main>

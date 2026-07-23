@@ -57,6 +57,44 @@ export const participants = [
     { name: "Noelia", img: "noelia.png" }
 ];
 
+// --- Concurso de Letras 2026 ---
+
+export const letterParticipants = [
+    { name: "Dani", img: "dani.jpeg" },
+    { name: "Marcos", img: "marcos.jpeg" },
+    { name: "Assem", img: "assem.jpeg" },
+    { name: "Paula", img: "paula.png" },
+    { name: "Marc", img: "marc.jpg" },
+    { name: "Mery", img: "mery.jpeg" },
+    { name: "Brisa", img: "brisa.jpeg" },
+];
+
+export const letterTeams: Team[] = [
+    { name: 'Brisa y Dani', members: ['Brisa', 'Dani'] },
+    { name: 'Marc y Mery', members: ['Marc', 'Mery'] },
+    { name: 'Marcos y Assem', members: ['Marcos', 'Assem'] },
+    { name: 'Paula', members: ['Paula'] },
+
+];
+
+
+export const spanishPaletteCycle = ["Marrón", "Amarillo", "Blanco", "Verde", "Rojo", "Naranja", "Rosa"];
+export const englishPaletteCycle = ["Brown", "Yellow", "White", "Green", "Red", "Orange", "Pink"];
+
+export const getLetterPaletteIndex = (letter: string): number =>
+    (letter.toUpperCase().charCodeAt(0) - 65) % spanishPaletteCycle.length;
+
+export const getLetterSpanishColor = (letter: string): string =>
+    spanishPaletteCycle[getLetterPaletteIndex(letter)];
+
+export const getLetterEnglishColor = (letter: string): string =>
+    englishPaletteCycle[getLetterPaletteIndex(letter)];
+
+export const letters: Array<SelectableItem> = Array.from({ length: 26 }, (_, i) => {
+    const letter = String.fromCharCode(65 + i);
+    return { name: letter, backgroundColor: getLetterEnglishColor(letter) };
+});
+
 export const fixedAssignments: Assignments = {
     ['Sasori']: 'Marrón',
     ['Fuera moros']: 'Amarillo',

@@ -1,31 +1,36 @@
 import React, { useState } from "react";
 import CustomButton from "components/customButton/customButton";
-import { colorGlowClassMap } from "../constants";
 import { upsertVotes } from "supabase/pollActions";
+import { VoteRecord } from "pages/poll/poll";
 import Loading from "components/Loading/Loading";
 
 interface VotePanelProps {
+    participant: string | null;
     votes: Record<string, number | undefined>;
     setVotes: React.Dispatch<React.SetStateAction<Record<string, number | undefined>>>;
     voteCategories: string[];
     selectedColor: string | null;
     setSelectedColor: React.Dispatch<React.SetStateAction<string | null>>;
     reloadVotes(): void;
+    upsertVotesFn?: (participant: string, color: string, votes: VoteRecord) => PromiseLike<any>;
+    glowClass?: string;
 }
 
 const VotePanel: React.FC<VotePanelProps> = ({
+    participant,
     votes,
     setVotes,
     voteCategories,
     selectedColor,
     setSelectedColor,
     reloadVotes,
+    upsertVotesFn = upsertVotes,
+    glowClass = "",
 }) => {
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const ratings = [1, 2, 3, 4, 5];
 
-    const participant = localStorage.getItem("selectedParticipant");
     if (!participant) return <div>Error: no participante.</div>;
 
     const handleCategoryVote = (category: string, value: number) => {
@@ -42,7 +47,7 @@ const VotePanel: React.FC<VotePanelProps> = ({
         setLoading(true);
         setErrorMsg(null);
         try {
-            await upsertVotes(participant, selectedColor, {
+            await upsertVotesFn(participant, selectedColor, {
                 voteColor: selectedColor,
                 flavour: votes["Sabor"]!,
                 presentation: votes["Presentación"]!,
@@ -68,7 +73,7 @@ const VotePanel: React.FC<VotePanelProps> = ({
                 <Loading text="Guardando Voto..." />
             ) : (
                 <>
-                    <div className={`poll__categories ${selectedColor ? colorGlowClassMap[selectedColor] : ""}`}>
+                    <div className={`poll__categories ${glowClass}`}>
                         {voteCategories.map((category) => (
                             <div className="poll__category" key={category}>
                                 <h3 className="poll__categoryName">{category}</h3>

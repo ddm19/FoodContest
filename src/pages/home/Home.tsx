@@ -1,109 +1,47 @@
-import CustomButton from "components/customButton/customButton";
 import "./Home.scss";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { getParticipantVotes } from "supabase/pollActions";
-import { VoteRecord } from "pages/poll/poll";
-import { colors, participants } from "pages/poll/constants";
-import ParticipantIcon from "./components/participantIcon";
+import { getParticipantVotesLetters } from "supabase/letterActions";
+import { colors, participants, letterParticipants, letterTeams } from "pages/poll/constants";
+import CustomTabs, { TabItem } from "components/customTabs/customTabs";
+import ContestSection from "./components/contestSection";
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
-  const initialVotes: { [key: string]: VoteRecord[] } = {
-    ...Object.fromEntries(participants.map(participant => [participant.name, []]))
+  const tabs: TabItem[] = [
+    {
+      title: "Letras 2026",
+      content: (
+        <ContestSection
+          raffleRoute="/raffle-letters"
+          pollRoute="/poll-letters"
+          resultsRoute="/results-letters"
+          raffleLabel="SORTEO DE LETRAS"
+          participants={letterParticipants}
+          totalToVote={letterTeams.length - 1}
+          fetchParticipantVotes={getParticipantVotesLetters}
+        />
+      ),
+    },
+    {
+      title: "Colores 2025",
+      content: (
+        <ContestSection
+          raffleRoute="/raffle"
+          pollRoute="/poll"
+          resultsRoute="/results"
+          raffleLabel="SORTEO DE COLORES"
+          participants={participants}
+          totalToVote={colors.length - 1}
+          fetchParticipantVotes={getParticipantVotes}
+        />
+      ),
+    },
 
-  };
-  const [participantVotes, setParticipantVotes] = useState<{ [key: string]: VoteRecord[] }>(initialVotes);
-
-
-  const allVotesDone = (votes: { [key: string]: VoteRecord[] }) => {
-    if (!votes || Object.keys(votes).length === 0) return false;
-    return Object.entries(votes).every(([_participant, voteRecords]) => {
-      const votedColors = voteRecords.map(record => record.voteColor);
-      return votedColors.length === colors.length - 1
-    });
-  }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getParticipantVotes()
-        .then((response) => {
-          if (response) {
-            setParticipantVotes(prevVotes => ({ ...prevVotes, ...response }));
-          } else {
-            console.error("Invalid response received from getParticipantVotes");
-          }
-          console.log(allVotesDone(response || {}));
-        })
-        .catch((error) => {
-          console.error("Error fetching participant votes:", error);
-        });
-    }, 15000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    getParticipantVotes()
-      .then((response) => {
-        if (response)
-          setParticipantVotes(prevVotes => ({ ...prevVotes, ...response }));
-        else
-          console.error("Invalid response received from getParticipantVotes");
-        console.log(allVotesDone(response || {}));
-      })
-      .catch((error) => {
-        console.error("Error fetching participant votes:", error);
-      });
-  }, []);
+  ];
 
   return (
     <div className="home">
-      <h1>Bienvenidos a La Velada de colorines 2025</h1>
-      <div className="home__buttonContainer">
-        <CustomButton
-          variant="text"
-          color="primary"
-          className="home__sectionButton"
-          onClick={() => {
-            navigate("/raffle");
-          }}
-        >
-          SORTEO DE COLORES
-        </CustomButton>
-        <CustomButton
-          variant="text"
-          color="primary"
-          className="home__sectionButton"
-          onClick={() => {
-            navigate("/poll");
-          }}
-        >
-          VOTACIONES
-        </CustomButton>
-        <CustomButton
-          variant="text"
-          color="primary"
-          className="home__sectionButton home__sectionButton--results"
-          disabled={!allVotesDone(participantVotes)}
-          onClick={() => {
-            navigate("/results");
-          }}
-        >
-          RESULTADOS
-          <div className="home__participantsResultsContainer">
-            {Object.entries(participantVotes).map(([participant, voteRecords]) =>
-              voteRecords.length < colors.length - 1 ?
-                <ParticipantIcon
-                  key={participant}
-                  participant={{ name: participant, votes: voteRecords.length, img: participants.find(p => p.name === participant)?.img || "" }}
-                />
-                : null
-            )}
-          </div>
-
-        </CustomButton>
-      </div>
+      <h1>Bienvenidos a La Velada</h1>
+      <CustomTabs tabs={tabs} />
     </div>
   );
 };

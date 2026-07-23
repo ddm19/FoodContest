@@ -3,6 +3,7 @@ import './raffle.scss';
 import Loading from 'components/Loading/Loading';
 import { fixedAssignments, teams } from 'pages/poll/constants';
 import DataTable, { Column } from 'components/dataTable/dataTable';
+import { shuffle } from 'utils/array';
 
 export interface Team {
     name: string;
@@ -40,15 +41,6 @@ const resultsColumns: Column<ResultData>[] = [
         dataColorAccessor: 'color',
     },
 ];
-
-const shuffle = (array: string[]): string[] => {
-    const arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-};
 
 const Raffle: React.FC = () => {
     const [assignments, setAssignments] = useState<Assignments>({});
